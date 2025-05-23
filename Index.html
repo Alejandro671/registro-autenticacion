@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema de Registro de Usuarios y Autenticación</title>
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Íconos  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Registro -->
+    <div id="registro">
+<div class="icono-formulario icono-centrado icono-registro">
+  <i class="fas fa-user-plus"></i>
+</div>
+
+      <h2>Registro</h2>
+      <div class="input-icon">
+        <i class="fas fa-user"></i>
+        <input type="text" id="reg-usuario" placeholder="Nombre de usuario" required />
+      </div>
+      <div class="input-icon">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="reg-correo" placeholder="Correo electrónico" required onblur="verificarCorreo()" />
+      </div>
+      <div class="input-icon">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="reg-pass" placeholder="Contraseña" required />
+      </div>
+      <label><input type="checkbox" onclick="togglePassword('reg-pass')"> Mostrar contraseña</label>
+      <label><input type="radio" name="rol" value="admin" /> Administrador</label>
+      <label><input type="radio" name="rol" value="user" checked /> Usuario Regular</label>
+      <button onclick="registrar()"><i class="fas fa-user-plus"></i> Registrarse</button>
+      <div class="toggle" onclick="mostrarLogin()">¿Ya tienes cuenta? Iniciar sesión</div>
+    </div>
+
+    <!-- Login -->
+    <div id="login">
+<div class="icono-formulario icono-centrado icono-login">
+  <i class="fas fa-user-lock"></i>
+</div>
+
+      <h2>Iniciar Sesión</h2>
+      <div class="input-icon">
+        <i class="fas fa-user-circle"></i>
+        <input type="text" id="login-correo" placeholder="Correo o nombre de usuario" required />
+      </div>
+      <div class="input-icon">
+        <i class="fas fa-key"></i>
+        <input type="password" id="login-pass" placeholder="Contraseña" required />
+      </div>
+      <label><input type="checkbox" onclick="togglePassword('login-pass')"> Mostrar contraseña</label>
+      <button onclick="iniciarSesion()"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</button>
+      <div class="toggle" onclick="mostrarRegistro()">¿No tienes cuenta? Regístrate</div>
+      <div><a href="javascript:void(0);" onclick="recuperarContraseña()">¿Olvidaste tu contraseña?</a></div>
+    </div>
+
+    <!-- Zona de bienvenida -->
+<!-- Panel de administrador FUERA del contenedor -->
+<div id="bienvenida" class="hidden panel-admin">
+  <div class="admin-header">
+    <h2 id="mensaje-bienvenida"></h2>
+    <button class="cerrar-sesion" onclick="cerrarSesion()">
+      <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+    </button>
+  </div>
+
+  <div id="lista-cuentas">
+    <h3>Cuentas Registradas</h3>
+    <input type="text" id="buscador-cuentas" placeholder="Buscar usuario o correo..." oninput="filtrarCuentas()" />
+    <div class="tabla-container">
+      <table id="tabla-cuentas">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="cuentas-registradas">
+    
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div id="panel-usuario" class="hidden panel-usuario">
+  <div class="usuario-header">
+    <h2 id="usuario-nombre">Bienvenido, Usuario</h2>
+    <button class="btn-cerrar" onclick="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+  </div>
+  <div class="usuario-info">
+    <p><strong>Nombre de usuario:</strong> <span id="info-nombre"></span></p>
+    <p><strong>Correo electrónico:</strong> <span id="info-correo"></span></p>
+    <button class="btn-editar" onclick="editarPerfil()"><i class="fas fa-user-edit"></i> Editar perfil</button>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
